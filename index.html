@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Empire United Fencing | 2026-27 Season Calendar</title>
+<!--
+  EUF 2026-27 Season Calendar (website version)
+  Self-contained: no external files or scripts required.
+  Hostinger: upload as its own page, or paste everything inside
+  the <body> tags into an Embed Code / Custom HTML block.
+  Brand: navy #1B3A6B, gold #C8A951, per EUF design system.
+-->
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; background:#F4F4F4; color:#555555; }
+  .euf-cal-wrap { max-width:1100px; margin:0 auto; padding:24px 16px 48px; }
+
+  .euf-masthead { background:#1B3A6B; text-align:center; padding:34px 20px 26px; }
+  .euf-masthead .club { font-size:26px; font-weight:700; color:#FFFFFF; letter-spacing:2px; text-transform:uppercase; line-height:1.2; }
+  .euf-masthead .city { font-size:11px; font-weight:700; color:#8EB4D8; letter-spacing:4px; text-transform:uppercase; margin-top:6px; }
+  .euf-masthead .season { font-size:12px; color:#B8CDE0; margin-top:10px; letter-spacing:0.5px; }
+  .euf-goldbar { height:3px; background:#C8A951; }
+
+  .euf-intro { background:#FFFFFF; padding:22px 24px; border-bottom:1px solid #EBEBEB; }
+  .euf-eyebrow { font-size:10px; font-weight:700; color:#C8A951; letter-spacing:3px; text-transform:uppercase; margin-bottom:6px; }
+  .euf-intro h1 { font-size:20px; font-weight:700; color:#1B3A6B; line-height:1.3; margin-bottom:10px; }
+  .euf-intro p { font-size:13px; line-height:1.75; max-width:720px; }
+
+  .euf-legend { background:#FFFFFF; padding:16px 24px 20px; display:flex; flex-wrap:wrap; gap:12px 18px; align-items:center; border-bottom:1px solid #EBEBEB; }
+  .euf-legend span { font-size:11px; color:#555555; display:inline-flex; align-items:center; gap:6px; }
+  .lg-box { width:13px; height:13px; border-radius:3px; display:inline-block; }
+  .lg-dot { width:8px; height:8px; border-radius:50%; display:inline-block; box-shadow:0 0 0 1px #FFFFFF, 0 0 0 2px #DDDDDD; }
+
+  .euf-months { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding-top:18px; }
+  @media (max-width:900px){ .euf-months { grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .euf-months { grid-template-columns:1fr; } }
+
+  .m-card { background:#FFFFFF; border:1px solid #EBEBEB; }
+  .m-head { background:#1B3A6B; padding:10px 14px; }
+  .m-head .m-eyebrow { font-size:9px; font-weight:700; color:#C8A951; letter-spacing:2px; text-transform:uppercase; }
+  .m-head .m-name { font-size:15px; font-weight:700; color:#FFFFFF; }
+  .m-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; padding:10px 10px 6px; font-size:11px; text-align:center; }
+  .m-grid .dow { color:#888888; font-weight:700; font-size:9px; letter-spacing:1px; padding-bottom:2px; }
+  .day { position:relative; padding:4px 0 11px; border-radius:3px; color:#555555; line-height:1.2; min-height:26px; }
+  .day.closed { background:#C8362A; color:#FFFFFF; font-weight:700; }
+  .day.tourn { background:#2E5080; color:#FFFFFF; }
+  .day.tourn-tbd { background:#2E5080; color:#FFFFFF; opacity:0.65; outline:1.5px dashed #1B3A6B; outline-offset:-1.5px; }
+  .day.camp { background:#C8A951; color:#1B3A6B; font-weight:700; }
+  .day.clinic { background:#F5EDD6; color:#7A6420; font-weight:700; box-shadow:inset 0 0 0 1px #C8A951; }
+  .day.clinic-tbd { background:#F5EDD6; color:#7A6420; outline:1.5px dashed #C8A951; outline-offset:-1.5px; }
+  .day.dark { background:#F0F4FA; color:#AAB6C4; }
+  .day.marker { box-shadow:inset 0 0 0 2px #1B3A6B; font-weight:700; color:#1B3A6B; }
+  .dots { position:absolute; bottom:3px; left:0; right:0; display:flex; justify-content:center; gap:2px; }
+  .dots i { width:5px; height:5px; border-radius:50%; display:inline-block; box-shadow:0 0 0 1px #FFFFFF; }
+  .d-elite { background:#1B3A6B; } .d-youth { background:#8EB4D8; } .d-varsity { background:#C8A951; }
+
+  .m-events { border-top:1px solid #EBEBEB; padding:10px 14px 12px; }
+  .m-events div { font-size:11px; line-height:1.6; color:#555555; padding-left:12px; position:relative; }
+  .m-events div::before { content:'\2022'; color:#C8A951; position:absolute; left:0; font-weight:700; }
+  .m-events b { color:#1B3A6B; font-weight:700; }
+
+  .euf-note { background:#F0F4FA; border-left:4px solid #1B3A6B; padding:14px 16px; margin-top:18px; }
+  .euf-note p { font-size:12px; color:#333333; line-height:1.7; }
+
+  .euf-footer { background:#1B3A6B; text-align:center; padding:24px 20px; margin-top:28px; }
+  .euf-footer .fclub { font-size:12px; font-weight:700; color:#FFFFFF; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
+  .euf-footer .faddr { font-size:11px; color:#8EB4D8; line-height:1.8; }
+</style>
+</head>
+<body>
+
+<div class="euf-masthead">
+  <div class="club">Empire United Fencing</div>
+  <div class="city">New York City</div>
+  <div class="season">2026-27 Season Calendar</div>
+</div>
+<div class="euf-goldbar"></div>
+
+<div class="euf-cal-wrap">
+
+  <div class="euf-intro">
+    <div class="euf-eyebrow">September 2026 through August 2027</div>
+    <h1>One Season, Every Date</h1>
+    <p>Class days for every program, tournament weekends, camps, and clinics. Elite trains Monday through Wednesday, Friday, and Saturday. Youth classes meet Monday, Thursday, and Saturday. EUF Varsity meets Thursday and Saturday. Classes run on school holidays and tournament weekends unless marked.</p>
+  </div>
+
+  <div class="euf-legend">
+    <span><i class="lg-box" style="background:#2E5080;"></i>Tournament</span>
+    <span><i class="lg-box" style="background:#C8A951;"></i>Camp</span>
+    <span><i class="lg-box" style="background:#F5EDD6; box-shadow:inset 0 0 0 1px #C8A951;"></i>Clinic</span>
+    <span><i class="lg-box" style="background:#C8362A;"></i>Club closed</span>
+    <span><i class="lg-box" style="background:#F0F4FA;"></i>No classes</span>
+    <span><i class="lg-dot" style="background:#1B3A6B;"></i>Elite class</span>
+    <span><i class="lg-dot" style="background:#8EB4D8;"></i>Youth class</span>
+    <span><i class="lg-dot" style="background:#C8A951;"></i>Varsity class</span>
+  </div>
+
+  <div class="euf-months" id="euf-months"></div>
+
+  <div class="euf-note">
+    <p><b style="color:#1B3A6B;">Good to know:</b> Beginner cycles close with a Saturday tournament at the club. Winter Camp (Dec 27&ndash;30) and the Pre-Nationals Camp (Jun 26&ndash;29) are included for Elite and Youth Competitive members and open to fencers from other clubs. Clinics are special extended sessions with visiting coaches and fencers, registered separately by all programs. Summer Nationals 2027 dates will be added when USA Fencing announces them.</p>
+  </div>
+
+</div>
+
+<div class="euf-footer">
+  <div class="fclub">Empire United Fencing</div>
+  <div class="faddr">229 W 28th St, Floor 2 &nbsp;|&nbsp; New York, NY 10001</div>
+</div>
+
+<script>
+(function(){
+  var F = {};
+  function setr(y,m,a,b,v){ for(var d=a; d<=b; d++){ var k=y+'-'+m+'-'+d; F[k]=Object.assign(F[k]||{},v); } }
+  function set1(y,m,d,v){ setr(y,m,d,d,v); }
+
+  set1(2026,9,3,{cls:'marker'});
+  set1(2026,9,7,{cls:'closed'});
+  set1(2026,9,10,{cls:'marker'});
+  setr(2026,9,25,27,{cls:'tourn'});
+  setr(2026,10,2,4,{cls:'tourn'});
+  setr(2026,10,9,12,{cls:'tourn'});
+  setr(2026,10,24,25,{cls:'tourn'});
+  setr(2026,11,20,23,{cls:'tourn'});
+  set1(2026,11,26,{cls:'closed'});
+  setr(2026,11,27,29,{cls:'tourn'});
+  setr(2026,12,18,20,{cls:'tourn'});
+  set1(2026,12,24,{cls:'dark'});
+  set1(2026,12,25,{cls:'closed'});
+  set1(2026,12,26,{cls:'dark'});
+  setr(2026,12,27,30,{cls:'camp'});
+  set1(2026,12,31,{cls:'dark'});
+  set1(2027,1,1,{cls:'closed'});
+  set1(2027,1,2,{cls:'dark'});
+  set1(2027,1,3,{cls:'clinic-tbd'});
+  setr(2027,1,8,11,{cls:'tourn'});
+  setr(2027,1,16,18,{cls:'tourn'});
+  set1(2027,2,15,{cls:'clinic'});
+  setr(2027,2,26,28,{cls:'tourn'});
+  setr(2027,3,19,21,{cls:'tourn'});
+  setr(2027,3,26,28,{cls:'tourn'});
+  setr(2027,4,9,11,{cls:'tourn'});
+  setr(2027,4,16,19,{cls:'tourn-tbd'});
+  setr(2027,4,24,25,{cls:'tourn'});
+  set1(2027,5,31,{cls:'closed'});
+  set1(2027,6,5,{cls:'marker'});
+  set1(2027,6,12,{cls:'marker'});
+  set1(2027,6,19,{cls:'marker'});
+  set1(2027,6,25,{cls:'marker'});
+  setr(2027,6,26,29,{cls:'camp'});
+
+  var months = [
+    [2026,9,'September 2026'],[2026,10,'October 2026'],[2026,11,'November 2026'],[2026,12,'December 2026'],
+    [2027,1,'January 2027'],[2027,2,'February 2027'],[2027,3,'March 2027'],[2027,4,'April 2027'],
+    [2027,5,'May 2027'],[2027,6,'June 2027'],[2027,7,'July 2027'],[2027,8,'August 2027']
+  ];
+
+  var events = {
+    '2026-9': ['<b>Sep 3</b> First practice, season opens. Beginner cycle 1 begins','<b>Sep 7</b> Labor Day, club closed','<b>Sep 10</b> First EUF Varsity class','<b>Sep 12</b> Parent meeting: season kickoff','<b>Sep 25&ndash;27</b> Premier Challenge, Suffern NY'],
+    '2026-10': ['<b>Oct 2&ndash;4</b> Ben Gutenberg Memorial, Rochester NY','<b>Oct 3</b> Beginner cycle 1 tournament','<b>Oct 9&ndash;12</b> NAC, Orlando FL','<b>Oct 24&ndash;25</b> Morris Cup, Suffern NY'],
+    '2026-11': ['<b>Nov 7</b> Beginner cycle 2 tournament','<b>Nov 20&ndash;23</b> NAC, Columbus OH','<b>Nov 26</b> Thanksgiving, club closed','<b>Nov 27&ndash;29</b> Cobra Challenge, Secaucus NJ. No youth class Sat Nov 28'],
+    '2026-12': ['<b>Dec 18&ndash;20</b> Fairfax Challenge, Fredericksburg VA','<b>Dec 19</b> Last youth and Varsity classes of 2026. Beginner cycle 3 tournament','<b>Dec 21&ndash;23</b> Elite classes run','<b>Dec 23</b> Last Elite class of 2026','<b>Dec 27&ndash;30</b> Winter Camp','<b>Dec 25 and Dec 31</b> Closed for the holidays'],
+    '2027-1': ['<b>Jan 1</b> New Year\u2019s Day, club closed','<b>Jan 3</b> Clinic (date tentative)','<b>Jan 4</b> Elite and youth classes resume','<b>Jan 7</b> Varsity resumes. Beginner cycle 4 begins','<b>Jan 8&ndash;11</b> Junior Olympics, Oklahoma City','<b>Jan 16&ndash;18</b> Capitol Clash, Oxon Hill MD','<b>Jan 27</b> Parent meeting: semester wrap'],
+    '2027-2': ['<b>Feb 6</b> Beginner cycle 4 tournament','<b>Feb 15</b> Clinic (Presidents Day): visiting coaches, separate registration, replaces the day\u2019s classes','<b>Feb 26&ndash;28</b> Duel of the East Coast, Phoenixville PA'],
+    '2027-3': ['<b>Mar 13</b> Beginner cycle 5 tournament','<b>Mar 19&ndash;21</b> American Challenge, Hartford CT','<b>Mar 26&ndash;28</b> Absolute Foundation, Atlantic City NJ. Classes run'],
+    '2027-4': ['<b>Apr 7</b> Parent meeting: spring check-in','<b>Apr 9&ndash;11</b> Fairfax Challenge, Virginia Beach VA','<b>Apr 16&ndash;19</b> NAC, Cincinnati OH (attendance TBD)','<b>Apr 24&ndash;25</b> American Challenge, Suffern NY'],
+    '2027-5': ['<b>May 1</b> Beginner cycle 6 tournament','<b>May 31</b> Memorial Day, club closed'],
+    '2027-6': ['<b>Jun 5</b> Beginner cycle 7 tournament, Beginner season ends','<b>Jun 12</b> Final youth class day','<b>Jun 16</b> Parent meeting: pre-Nationals','<b>Jun 19</b> Last Varsity class','<b>Jun 25</b> Last Elite class','<b>Jun 26&ndash;29</b> Pre-Nationals Camp'],
+    '2027-7': ['<b>Summer Nationals 2027</b>: dates to be announced by USA Fencing'],
+    '2027-8': ['<b>Preseason Camp</b>: three weeks, dates to be announced']
+  };
+
+  var seasonStart = new Date(2026,8,3), eliteEnd = new Date(2027,5,25), youthEnd = new Date(2027,5,12);
+  var eliteSpans = [[new Date(2026,8,3),new Date(2026,11,23)],[new Date(2027,0,4),new Date(2027,5,25)]];
+  var youthSpans = [[new Date(2026,8,3),new Date(2026,11,19)],[new Date(2027,0,4),new Date(2027,5,12)]];
+  var varsSpans  = [[new Date(2026,8,10),new Date(2026,11,19)],[new Date(2027,0,7),new Date(2027,5,19)]];
+  var youthSkip = {'2026-11-28':1};
+
+  function inSpan(dt, list){ for(var i=0;i<list.length;i++){ if(dt>=list[i][0] && dt<=list[i][1]) return true; } return false; }
+
+  function dots(y,m,d,cls){
+    if(cls==='closed'||cls==='dark'||cls==='camp'||cls==='clinic'||cls==='clinic-tbd') return '';
+    var dt = new Date(y,m-1,d), wd = dt.getDay(), key = y+'-'+m+'-'+d, s = '';
+    if([1,2,3,5,6].indexOf(wd)>-1 && inSpan(dt,eliteSpans)) s += '<i class="d-elite"></i>';
+    if([1,4,6].indexOf(wd)>-1 && inSpan(dt,youthSpans) && !youthSkip[key]) s += '<i class="d-youth"></i>';
+    if([4,6].indexOf(wd)>-1 && inSpan(dt,varsSpans)) s += '<i class="d-varsity"></i>';
+    return s ? '<span class="dots">'+s+'</span>' : '';
+  }
+
+  var wrap = document.getElementById('euf-months');
+  var dow = ['S','M','T','W','T','F','S'];
+  months.forEach(function(mo){
+    var y=mo[0], m=mo[1], label=mo[2];
+    var card = document.createElement('div');
+    card.className = 'm-card';
+    var h = '<div class="m-head"><div class="m-eyebrow">2026-27 Season</div><div class="m-name">'+label+'</div></div>';
+    h += '<div class="m-grid">';
+    for(var i=0;i<7;i++) h += '<div class="dow">'+dow[i]+'</div>';
+    var first = new Date(y,m-1,1).getDay();
+    var days = new Date(y,m,0).getDate();
+    for(var i=0;i<first;i++) h += '<div></div>';
+    for(var d=1; d<=days; d++){
+      var f = F[y+'-'+m+'-'+d] || {};
+      var cls = f.cls || '';
+      h += '<div class="day '+cls+'">'+d+dots(y,m,d,cls)+'</div>';
+    }
+    h += '</div>';
+    var ev = events[y+'-'+m];
+    if(ev && ev.length){
+      h += '<div class="m-events">';
+      ev.forEach(function(e){ h += '<div>'+e+'</div>'; });
+      h += '</div>';
+    }
+    card.innerHTML = h;
+    wrap.appendChild(card);
+  });
+})();
+</script>
+
+</body>
+</html>
