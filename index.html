@@ -3,220 +3,250 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Empire United Fencing | 2026-27 Season Calendar</title>
+<title>EUF 2026-27 Season Calendar</title>
 <!--
-  EUF 2026-27 Season Calendar (website version)
-  Self-contained: no external files or scripts required.
-  Hostinger: upload as its own page, or paste everything inside
-  the <body> tags into an Embed Code / Custom HTML block.
-  Brand: navy #1B3A6B, gold #C8A951, per EUF design system.
+  EMPIRE UNITED FENCING 2026-27 SEASON CALENDAR
+  Self-contained. Paste into a Hostinger Embed Code block.
+  All CSS is scoped under #euf-cal so it will not affect the surrounding page.
+  RENDER NOTE: the month grids are drawn by the <script> block at the bottom from
+  an inlined Appendix A data set. If your host strips <script> tags, the grids will
+  NOT render and you will need a static HTML export of the calendar instead.
 -->
-<style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body { font-family: Arial, Helvetica, sans-serif; background:#F4F4F4; color:#555555; }
-  .euf-cal-wrap { max-width:1100px; margin:0 auto; padding:24px 16px 48px; }
+<style type="text/css">
+#euf-cal *{box-sizing:border-box;margin:0;padding:0;font-family:Arial,Helvetica,sans-serif;}
+#euf-cal{background:#F4F4F4;color:#555555;padding:16px 12px 32px;max-width:1180px;margin:0 auto;line-height:1.5;}
+#euf-cal .head{background:#1B3A6B;padding:24px 22px;text-align:center;}
+#euf-cal .head .club{color:#fff;font-size:22px;font-weight:700;letter-spacing:2px;text-transform:uppercase;}
+#euf-cal .head .sub{color:#8EB4D8;font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-top:6px;}
+#euf-cal .goldbar{height:3px;background:#C8A951;}
+#euf-cal .intro{background:#fff;padding:18px 22px;font-size:13px;color:#555;line-height:1.7;border-bottom:1px solid #EBEBEB;}
+#euf-cal .intro strong{color:#1B3A6B;}
+#euf-cal .eyebrow{font-size:10px;font-weight:700;color:#C8A951;letter-spacing:3px;text-transform:uppercase;}
 
-  .euf-masthead { background:#1B3A6B; text-align:center; padding:34px 20px 26px; }
-  .euf-masthead .club { font-size:26px; font-weight:700; color:#FFFFFF; letter-spacing:2px; text-transform:uppercase; line-height:1.2; }
-  .euf-masthead .city { font-size:11px; font-weight:700; color:#8EB4D8; letter-spacing:4px; text-transform:uppercase; margin-top:6px; }
-  .euf-masthead .season { font-size:12px; color:#B8CDE0; margin-top:10px; letter-spacing:0.5px; }
-  .euf-goldbar { height:3px; background:#C8A951; }
+/* legend */
+#euf-cal .legend{background:#fff;padding:16px 22px 6px;border-bottom:1px solid #EBEBEB;}
+#euf-cal .legrow{display:flex;flex-wrap:wrap;gap:14px 22px;margin-top:10px;}
+#euf-cal .leg{display:flex;align-items:center;gap:8px;font-size:12px;color:#555;}
+#euf-cal .swatch{width:26px;height:22px;border:1px solid #EBEBEB;flex:0 0 auto;position:relative;background:#fff;}
+#euf-cal .sw-reg{background:#CDD9EA;}
+#euf-cal .sw-nat{background:#1B3A6B;}
+#euf-cal .sw-out{background:#fff;border:2px solid #1B3A6B;}
+#euf-cal .sw-fie::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:#C8A951;}
+#euf-cal .sw-champ::after{content:"";position:absolute;left:0;right:0;bottom:0;height:5px;background:#8A6D22;}
+#euf-cal .sw-closed{background:#E6E6E6;background-image:repeating-linear-gradient(45deg,#E6E6E6,#E6E6E6 4px,#D2D2D2 4px,#D2D2D2 8px);}
+#euf-cal .chip{display:inline-flex;align-items:center;justify-content:center;width:15px;height:15px;font-size:10px;font-weight:700;border:1.5px solid;}
+#euf-cal .ih{display:inline-flex;align-items:center;justify-content:center;height:15px;padding:0 3px;font-size:8px;font-weight:700;letter-spacing:.3px;background:#C8A951;color:#1B3A6B;}
+#euf-cal .cE{color:#1B3A6B;border-color:#1B3A6B;}
+#euf-cal .cY{color:#2E5080;border-color:#2E5080;}
+#euf-cal .cV{color:#8A6D22;border-color:#C8A951;}
 
-  .euf-intro { background:#FFFFFF; padding:22px 24px; border-bottom:1px solid #EBEBEB; }
-  .euf-eyebrow { font-size:10px; font-weight:700; color:#C8A951; letter-spacing:3px; text-transform:uppercase; margin-bottom:6px; }
-  .euf-intro h1 { font-size:20px; font-weight:700; color:#1B3A6B; line-height:1.3; margin-bottom:10px; }
-  .euf-intro p { font-size:13px; line-height:1.75; max-width:720px; }
+/* month grids */
+#euf-cal .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:20px;}
+#euf-cal .month{background:#fff;border:1px solid #EBEBEB;}
+#euf-cal .mhead{background:#1B3A6B;color:#fff;padding:10px 12px;font-size:14px;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-align:center;}
+#euf-cal .dow{display:grid;grid-template-columns:repeat(7,1fr);background:#F0F4FA;}
+#euf-cal .dow span{font-size:9px;font-weight:700;color:#1B3A6B;text-align:center;padding:5px 0;letter-spacing:1px;}
+#euf-cal .days{display:grid;grid-template-columns:repeat(7,1fr);}
+#euf-cal .d{min-height:46px;border-right:1px solid #EBEBEB;border-bottom:1px solid #EBEBEB;padding:2px 3px;position:relative;overflow:hidden;}
+#euf-cal .d:nth-child(7n){border-right:none;}
+#euf-cal .d.empty{background:#FAFAFA;}
+#euf-cal .dn{font-size:10px;color:#888;line-height:1;}
+#euf-cal .letters{margin-top:2px;display:flex;gap:2px;flex-wrap:wrap;}
+#euf-cal .tag{display:block;font-size:7.5px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;line-height:1.15;margin-top:2px;}
+#euf-cal .tag.camp{color:#1B3A6B;}
+#euf-cal .tag.clinic{color:#8A6D22;}
+#euf-cal .tag.closed{color:#7A7A7A;}
+/* fills */
+#euf-cal .d.regional{background:#CDD9EA;}
+#euf-cal .d.national{background:#1B3A6B;}
+#euf-cal .d.national .dn{color:#B8CDE0;}
+#euf-cal .d.national .chip.cE{color:#fff;border-color:#fff;}
+#euf-cal .d.national .chip.cY{color:#B8CDE0;border-color:#B8CDE0;}
+#euf-cal .d.national .chip.cV{color:#C8A951;border-color:#C8A951;}
+#euf-cal .d.national_out{box-shadow:inset 0 0 0 2px #1B3A6B;}
+#euf-cal .d.closed{background:#E6E6E6;background-image:repeating-linear-gradient(45deg,#E6E6E6,#E6E6E6 4px,#D2D2D2 4px,#D2D2D2 8px);}
+#euf-cal .d.band{background:#F0F4FA;}
+/* bars */
+#euf-cal .d.fie{border-bottom:5px solid #C8A951;}
+#euf-cal .d.champ{border-bottom:5px solid #8A6D22;}
+#euf-cal .d.champ.soft{border-bottom:5px dashed #8A6D22;}
 
-  .euf-legend { background:#FFFFFF; padding:16px 24px 20px; display:flex; flex-wrap:wrap; gap:12px 18px; align-items:center; border-bottom:1px solid #EBEBEB; }
-  .euf-legend span { font-size:11px; color:#555555; display:inline-flex; align-items:center; gap:6px; }
-  .lg-box { width:13px; height:13px; border-radius:3px; display:inline-block; }
-  .lg-dot { width:8px; height:8px; border-radius:50%; display:inline-block; box-shadow:0 0 0 1px #FFFFFF, 0 0 0 2px #DDDDDD; }
+/* per-month text list */
+#euf-cal .mlist{background:#fff;border:1px solid #EBEBEB;border-top:none;padding:12px 14px;font-size:12px;color:#555;line-height:1.65;}
+#euf-cal .mlist .rec{color:#555;font-style:italic;margin-bottom:8px;padding-bottom:8px;border-bottom:1px solid #EBEBEB;}
+#euf-cal .mlist ul{list-style:none;}
+#euf-cal .mlist li{padding:3px 0;padding-left:14px;position:relative;}
+#euf-cal .mlist li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;background:#C8A951;}
+#euf-cal .mlist .lbl{font-weight:700;color:#1B3A6B;}
+#euf-cal .mlist .note{color:#888;}
+#euf-cal .mlist .none{color:#999;font-style:italic;}
 
-  .euf-months { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; padding-top:18px; }
-  @media (max-width:900px){ .euf-months { grid-template-columns:repeat(2,1fr); } }
-  @media (max-width:600px){ .euf-months { grid-template-columns:1fr; } }
+/* Beginner cycle view */
+#euf-cal .cycles{background:#fff;border:1px solid #EBEBEB;margin-top:24px;padding:20px 22px;}
+#euf-cal .cycles h3{font-size:17px;color:#1B3A6B;font-weight:700;margin:6px 0 4px;}
+#euf-cal .cycles p{font-size:13px;color:#555;line-height:1.7;margin-bottom:12px;}
+#euf-cal table.cyc{width:100%;border-collapse:collapse;}
+#euf-cal table.cyc td,#euf-cal table.cyc th{border:1px solid #EBEBEB;padding:8px 10px;font-size:12px;text-align:left;color:#555;}
+#euf-cal table.cyc th{background:#1B3A6B;color:#C8A951;font-size:10px;letter-spacing:1px;text-transform:uppercase;}
+#euf-cal table.cyc td.n{text-align:center;font-weight:700;color:#1B3A6B;}
+#euf-cal table.cyc tr.hl td{background:#F0F4FA;}
 
-  .m-card { background:#FFFFFF; border:1px solid #EBEBEB; }
-  .m-head { background:#1B3A6B; padding:10px 14px; }
-  .m-head .m-eyebrow { font-size:9px; font-weight:700; color:#C8A951; letter-spacing:2px; text-transform:uppercase; }
-  .m-head .m-name { font-size:15px; font-weight:700; color:#FFFFFF; }
-  .m-grid { display:grid; grid-template-columns:repeat(7,1fr); gap:2px; padding:10px 10px 6px; font-size:11px; text-align:center; }
-  .m-grid .dow { color:#888888; font-weight:700; font-size:9px; letter-spacing:1px; padding-bottom:2px; }
-  .day { position:relative; padding:4px 0 11px; border-radius:3px; color:#555555; line-height:1.2; min-height:26px; }
-  .day.closed { background:#C8362A; color:#FFFFFF; font-weight:700; }
-  .day.tourn { background:#2E5080; color:#FFFFFF; }
-  .day.tourn-tbd { background:#2E5080; color:#FFFFFF; opacity:0.65; outline:1.5px dashed #1B3A6B; outline-offset:-1.5px; }
-  .day.camp { background:#C8A951; color:#1B3A6B; font-weight:700; }
-  .day.clinic { background:#F5EDD6; color:#7A6420; font-weight:700; box-shadow:inset 0 0 0 1px #C8A951; }
-  .day.clinic-tbd { background:#F5EDD6; color:#7A6420; outline:1.5px dashed #C8A951; outline-offset:-1.5px; }
-  .day.dark { background:#F0F4FA; color:#AAB6C4; }
-  .day.marker { box-shadow:inset 0 0 0 2px #1B3A6B; font-weight:700; color:#1B3A6B; }
-  .dots { position:absolute; bottom:3px; left:0; right:0; display:flex; justify-content:center; gap:2px; }
-  .dots i { width:5px; height:5px; border-radius:50%; display:inline-block; box-shadow:0 0 0 1px #FFFFFF; }
-  .d-elite { background:#1B3A6B; } .d-youth { background:#8EB4D8; } .d-varsity { background:#C8A951; }
+#euf-cal .foot{font-size:11px;color:#888;line-height:1.7;margin-top:18px;padding:0 4px;}
 
-  .m-events { border-top:1px solid #EBEBEB; padding:10px 14px 12px; }
-  .m-events div { font-size:11px; line-height:1.6; color:#555555; padding-left:12px; position:relative; }
-  .m-events div::before { content:'\2022'; color:#C8A951; position:absolute; left:0; font-weight:700; }
-  .m-events b { color:#1B3A6B; font-weight:700; }
+@media (max-width:900px){#euf-cal .grid{grid-template-columns:repeat(2,1fr);}}
+@media (max-width:560px){#euf-cal .grid{grid-template-columns:1fr;} #euf-cal .d{min-height:52px;}}
 
-  .euf-note { background:#F0F4FA; border-left:4px solid #1B3A6B; padding:14px 16px; margin-top:18px; }
-  .euf-note p { font-size:12px; color:#333333; line-height:1.7; }
-
-  .euf-footer { background:#1B3A6B; text-align:center; padding:24px 20px; margin-top:28px; }
-  .euf-footer .fclub { font-size:12px; font-weight:700; color:#FFFFFF; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px; }
-  .euf-footer .faddr { font-size:11px; color:#8EB4D8; line-height:1.8; }
+@media print{
+  #euf-cal{background:#fff;padding:0;max-width:none;}
+  #euf-cal .grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+  #euf-cal .head,#euf-cal .mhead,#euf-cal .d.national{-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  #euf-cal .month,#euf-cal .mlist{page-break-inside:avoid;}
+  #euf-cal .intro,#euf-cal .foot{font-size:10px;}
+}
 </style>
 </head>
 <body>
-
-<div class="euf-masthead">
-  <div class="club">Empire United Fencing</div>
-  <div class="city">New York City</div>
-  <div class="season">2026-27 Season Calendar</div>
-</div>
-<div class="euf-goldbar"></div>
-
-<div class="euf-cal-wrap">
-
-  <div class="euf-intro">
-    <div class="euf-eyebrow">September 2026 through August 2027</div>
-    <h1>One Season, Every Date</h1>
-    <p>Class days for every program, tournament weekends, camps, and clinics. Elite trains Monday through Wednesday, Friday, and Saturday. Youth classes meet Monday, Thursday, and Saturday. EUF Varsity meets Thursday and Saturday. Classes run on school holidays and tournament weekends unless marked.</p>
+<div id="euf-cal">
+  <div class="head">
+    <div class="club">Empire United Fencing</div>
+    <div class="sub">2026-27 Season Calendar</div>
+  </div>
+  <div class="goldbar"></div>
+  <div class="intro">
+    <p>Every training day for the season, September 3, 2026 through June 25, 2027, plus camps, clinics, closures, and the tournaments on the EUF calendar. Each day shows which programs train: <strong>E</strong> Elite, <strong>Y</strong> Youth, <strong>V</strong> Varsity. On Mondays the youth session is Youth Competitive only; Youth Beginner trains Thursdays and Saturdays. Below each month is a plain list of that month's dated events.</p>
   </div>
 
-  <div class="euf-legend">
-    <span><i class="lg-box" style="background:#2E5080;"></i>Tournament</span>
-    <span><i class="lg-box" style="background:#C8A951;"></i>Camp</span>
-    <span><i class="lg-box" style="background:#F5EDD6; box-shadow:inset 0 0 0 1px #C8A951;"></i>Clinic</span>
-    <span><i class="lg-box" style="background:#C8362A;"></i>Club closed</span>
-    <span><i class="lg-box" style="background:#F0F4FA;"></i>No classes</span>
-    <span><i class="lg-dot" style="background:#1B3A6B;"></i>Elite class</span>
-    <span><i class="lg-dot" style="background:#8EB4D8;"></i>Youth class</span>
-    <span><i class="lg-dot" style="background:#C8A951;"></i>Varsity class</span>
+  <div class="legend">
+    <div class="eyebrow">Legend</div>
+    <div class="legrow">
+      <div class="leg"><span class="chip cE">E</span> Elite</div>
+      <div class="leg"><span class="chip cY">Y</span> Youth (Competitive and Beginner)</div>
+      <div class="leg"><span class="chip cV">V</span> Varsity</div>
+      <div class="leg"><span class="chip cY">Y</span><span class="ih">IH</span> Youth in-house tournament</div>
+      <div class="leg"><span class="swatch sw-reg"></span> Regional event, EUF attends</div>
+      <div class="leg"><span class="swatch sw-nat"></span> National event</div>
+      <div class="leg"><span class="swatch sw-fie"></span> International event</div>
+      <div class="leg"><span class="swatch"></span><span class="tag camp" style="margin:0">CAMP</span> Camp</div>
+      <div class="leg"><span class="swatch"></span><span class="tag clinic" style="margin:0">CLINIC</span> Clinic</div>
+      <div class="leg"><span class="swatch sw-closed"></span> Closed</div>
+    </div>
   </div>
 
-  <div class="euf-months" id="euf-months"></div>
+  <div id="euf-cal-grid" class="grid"></div>
 
-  <div class="euf-note">
-    <p><b style="color:#1B3A6B;">Good to know:</b> Beginner cycles close with a Saturday tournament at the club. Winter Camp (Dec 27&ndash;30) and the Pre-Nationals Camp (Jun 26&ndash;29) are included for Elite and Youth Competitive members and open to fencers from other clubs. Clinics are special extended sessions with visiting coaches and fencers, registered separately by all programs. Summer Nationals 2027 dates will be added when USA Fencing announces them.</p>
+  <div class="cycles">
+    <div class="eyebrow">Youth Beginner</div>
+    <h3>Beginner Cycle Schedule</h3>
+    <p>Youth Beginner runs in seven cycles, each closing with an in-house tournament on a Saturday. Cycles 1 through 5 and Cycle 7 are 10 sessions. Cycle 6 is 14 sessions because it spans the schools' staggered spring breaks.</p>
+    <table class="cyc" id="euf-cyc"></table>
   </div>
 
-</div>
-
-<div class="euf-footer">
-  <div class="fclub">Empire United Fencing</div>
-  <div class="faddr">229 W 28th St, Floor 2 &nbsp;|&nbsp; New York, NY 10001</div>
 </div>
 
 <script>
 (function(){
-  var F = {};
-  function setr(y,m,a,b,v){ for(var d=a; d<=b; d++){ var k=y+'-'+m+'-'+d; F[k]=Object.assign(F[k]||{},v); } }
-  function set1(y,m,d,v){ setr(y,m,d,d,v); }
-
-  set1(2026,9,3,{cls:'marker'});
-  set1(2026,9,7,{cls:'closed'});
-  set1(2026,9,10,{cls:'marker'});
-  setr(2026,9,25,27,{cls:'tourn'});
-  setr(2026,10,2,4,{cls:'tourn'});
-  setr(2026,10,9,12,{cls:'tourn'});
-  setr(2026,10,24,25,{cls:'tourn'});
-  setr(2026,11,20,23,{cls:'tourn'});
-  set1(2026,11,26,{cls:'closed'});
-  setr(2026,11,27,29,{cls:'tourn'});
-  setr(2026,12,18,20,{cls:'tourn'});
-  set1(2026,12,24,{cls:'dark'});
-  set1(2026,12,25,{cls:'closed'});
-  set1(2026,12,26,{cls:'dark'});
-  setr(2026,12,27,30,{cls:'camp'});
-  set1(2026,12,31,{cls:'dark'});
-  set1(2027,1,1,{cls:'closed'});
-  set1(2027,1,2,{cls:'dark'});
-  set1(2027,1,3,{cls:'clinic-tbd'});
-  setr(2027,1,8,11,{cls:'tourn'});
-  setr(2027,1,16,18,{cls:'tourn'});
-  set1(2027,2,15,{cls:'clinic'});
-  setr(2027,2,26,28,{cls:'tourn'});
-  setr(2027,3,19,21,{cls:'tourn'});
-  setr(2027,3,26,28,{cls:'tourn'});
-  setr(2027,4,9,11,{cls:'tourn'});
-  setr(2027,4,16,19,{cls:'tourn-tbd'});
-  setr(2027,4,24,25,{cls:'tourn'});
-  set1(2027,5,31,{cls:'closed'});
-  set1(2027,6,5,{cls:'marker'});
-  set1(2027,6,12,{cls:'marker'});
-  set1(2027,6,19,{cls:'marker'});
-  set1(2027,6,25,{cls:'marker'});
-  setr(2027,6,26,29,{cls:'camp'});
-
-  var months = [
-    [2026,9,'September 2026'],[2026,10,'October 2026'],[2026,11,'November 2026'],[2026,12,'December 2026'],
-    [2027,1,'January 2027'],[2027,2,'February 2027'],[2027,3,'March 2027'],[2027,4,'April 2027'],
-    [2027,5,'May 2027'],[2027,6,'June 2027'],[2027,7,'July 2027'],[2027,8,'August 2027']
-  ];
-
-  var events = {
-    '2026-9': ['<b>Sep 3</b> First practice, season opens. Beginner cycle 1 begins','<b>Sep 7</b> Labor Day, club closed','<b>Sep 10</b> First EUF Varsity class','<b>Sep 12</b> Parent meeting: season kickoff','<b>Sep 25&ndash;27</b> Premier Challenge, Suffern NY'],
-    '2026-10': ['<b>Oct 2&ndash;4</b> Ben Gutenberg Memorial, Rochester NY','<b>Oct 3</b> Beginner cycle 1 tournament','<b>Oct 9&ndash;12</b> NAC, Orlando FL','<b>Oct 24&ndash;25</b> Morris Cup, Suffern NY'],
-    '2026-11': ['<b>Nov 7</b> Beginner cycle 2 tournament','<b>Nov 20&ndash;23</b> NAC, Columbus OH','<b>Nov 26</b> Thanksgiving, club closed','<b>Nov 27&ndash;29</b> Cobra Challenge, Secaucus NJ. No youth class Sat Nov 28'],
-    '2026-12': ['<b>Dec 18&ndash;20</b> Fairfax Challenge, Fredericksburg VA','<b>Dec 19</b> Last youth and Varsity classes of 2026. Beginner cycle 3 tournament','<b>Dec 21&ndash;23</b> Elite classes run','<b>Dec 23</b> Last Elite class of 2026','<b>Dec 27&ndash;30</b> Winter Camp','<b>Dec 25 and Dec 31</b> Closed for the holidays'],
-    '2027-1': ['<b>Jan 1</b> New Year\u2019s Day, club closed','<b>Jan 3</b> Clinic (date tentative)','<b>Jan 4</b> Elite and youth classes resume','<b>Jan 7</b> Varsity resumes. Beginner cycle 4 begins','<b>Jan 8&ndash;11</b> Junior Olympics, Oklahoma City','<b>Jan 16&ndash;18</b> Capitol Clash, Oxon Hill MD','<b>Jan 27</b> Parent meeting: semester wrap'],
-    '2027-2': ['<b>Feb 6</b> Beginner cycle 4 tournament','<b>Feb 15</b> Clinic (Presidents Day): visiting coaches, separate registration, replaces the day\u2019s classes','<b>Feb 26&ndash;28</b> Duel of the East Coast, Phoenixville PA'],
-    '2027-3': ['<b>Mar 13</b> Beginner cycle 5 tournament','<b>Mar 19&ndash;21</b> American Challenge, Hartford CT','<b>Mar 26&ndash;28</b> Absolute Foundation, Atlantic City NJ. Classes run'],
-    '2027-4': ['<b>Apr 7</b> Parent meeting: spring check-in','<b>Apr 9&ndash;11</b> Fairfax Challenge, Virginia Beach VA','<b>Apr 16&ndash;19</b> NAC, Cincinnati OH (attendance TBD)','<b>Apr 24&ndash;25</b> American Challenge, Suffern NY'],
-    '2027-5': ['<b>May 1</b> Beginner cycle 6 tournament','<b>May 31</b> Memorial Day, club closed'],
-    '2027-6': ['<b>Jun 5</b> Beginner cycle 7 tournament, Beginner season ends','<b>Jun 12</b> Final youth class day','<b>Jun 16</b> Parent meeting: pre-Nationals','<b>Jun 19</b> Last Varsity class','<b>Jun 25</b> Last Elite class','<b>Jun 26&ndash;29</b> Pre-Nationals Camp'],
-    '2027-7': ['<b>Summer Nationals 2027</b>: dates to be announced by USA Fencing'],
-    '2027-8': ['<b>Preseason Camp</b>: three weeks, dates to be announced']
-  };
-
-  var seasonStart = new Date(2026,8,3), eliteEnd = new Date(2027,5,25), youthEnd = new Date(2027,5,12);
-  var eliteSpans = [[new Date(2026,8,3),new Date(2026,11,23)],[new Date(2027,0,4),new Date(2027,5,25)]];
-  var youthSpans = [[new Date(2026,8,3),new Date(2026,11,19)],[new Date(2027,0,4),new Date(2027,5,12)]];
-  var varsSpans  = [[new Date(2026,8,10),new Date(2026,11,19)],[new Date(2027,0,7),new Date(2027,5,19)]];
-  var youthSkip = {'2026-11-28':1};
-
-  function inSpan(dt, list){ for(var i=0;i<list.length;i++){ if(dt>=list[i][0] && dt<=list[i][1]) return true; } return false; }
-
-  function dots(y,m,d,cls){
-    if(cls==='closed'||cls==='dark'||cls==='camp'||cls==='clinic'||cls==='clinic-tbd') return '';
-    var dt = new Date(y,m-1,d), wd = dt.getDay(), key = y+'-'+m+'-'+d, s = '';
-    if([1,2,3,5,6].indexOf(wd)>-1 && inSpan(dt,eliteSpans)) s += '<i class="d-elite"></i>';
-    if([1,4,6].indexOf(wd)>-1 && inSpan(dt,youthSpans) && !youthSkip[key]) s += '<i class="d-youth"></i>';
-    if([4,6].indexOf(wd)>-1 && inSpan(dt,varsSpans)) s += '<i class="d-varsity"></i>';
-    return s ? '<span class="dots">'+s+'</span>' : '';
+  var practices = {"2026-09-03":"YV","2026-09-04":"E","2026-09-05":"EYV","2026-09-08":"E","2026-09-09":"E","2026-09-10":"YV","2026-09-11":"E","2026-09-12":"EYV","2026-09-14":"EY","2026-09-15":"E","2026-09-16":"E","2026-09-17":"YV","2026-09-18":"E","2026-09-19":"EYV","2026-09-21":"EY","2026-09-22":"E","2026-09-23":"E","2026-09-24":"YV","2026-09-25":"E","2026-09-26":"EYV","2026-09-28":"EY","2026-09-29":"E","2026-09-30":"E","2026-10-01":"YV","2026-10-02":"E","2026-10-03":"EYV","2026-10-05":"EY","2026-10-06":"E","2026-10-07":"E","2026-10-08":"YV","2026-10-09":"E","2026-10-10":"EYV","2026-10-12":"EY","2026-10-13":"E","2026-10-14":"E","2026-10-15":"YV","2026-10-16":"E","2026-10-17":"EYV","2026-10-19":"EY","2026-10-20":"E","2026-10-21":"E","2026-10-22":"YV","2026-10-23":"E","2026-10-24":"EYV","2026-10-26":"EY","2026-10-27":"E","2026-10-28":"E","2026-10-29":"YV","2026-10-30":"E","2026-10-31":"EYV","2026-11-02":"EY","2026-11-03":"E","2026-11-04":"E","2026-11-05":"YV","2026-11-06":"E","2026-11-07":"EYV","2026-11-09":"EY","2026-11-10":"E","2026-11-11":"E","2026-11-12":"YV","2026-11-13":"E","2026-11-14":"EYV","2026-11-16":"EY","2026-11-17":"E","2026-11-18":"E","2026-11-19":"YV","2026-11-20":"E","2026-11-21":"EYV","2026-11-23":"EY","2026-11-24":"E","2026-11-25":"E","2026-11-27":"E","2026-11-28":"E","2026-11-30":"EY","2026-12-01":"E","2026-12-02":"E","2026-12-03":"YV","2026-12-04":"E","2026-12-05":"EYV","2026-12-07":"EY","2026-12-08":"E","2026-12-09":"E","2026-12-10":"YV","2026-12-11":"E","2026-12-12":"EYV","2026-12-14":"EY","2026-12-15":"E","2026-12-16":"E","2026-12-17":"YV","2026-12-18":"E","2026-12-19":"EYV","2026-12-21":"E","2026-12-22":"E","2026-12-23":"E","2027-01-04":"EY","2027-01-05":"E","2027-01-06":"E","2027-01-07":"YV","2027-01-08":"E","2027-01-09":"EYV","2027-01-11":"EY","2027-01-12":"E","2027-01-13":"E","2027-01-14":"YV","2027-01-15":"E","2027-01-16":"EYV","2027-01-18":"EY","2027-01-19":"E","2027-01-20":"E","2027-01-21":"YV","2027-01-22":"E","2027-01-23":"EYV","2027-01-25":"EY","2027-01-26":"E","2027-01-27":"E","2027-01-28":"YV","2027-01-29":"E","2027-01-30":"EYV","2027-02-01":"EY","2027-02-02":"E","2027-02-03":"E","2027-02-04":"YV","2027-02-05":"E","2027-02-06":"EYV","2027-02-08":"EY","2027-02-09":"E","2027-02-10":"E","2027-02-11":"YV","2027-02-12":"E","2027-02-13":"EYV","2027-02-16":"E","2027-02-17":"E","2027-02-18":"YV","2027-02-19":"E","2027-02-20":"EYV","2027-02-22":"EY","2027-02-23":"E","2027-02-24":"E","2027-02-25":"YV","2027-02-26":"E","2027-02-27":"EYV","2027-03-01":"EY","2027-03-02":"E","2027-03-03":"E","2027-03-04":"YV","2027-03-05":"E","2027-03-06":"EYV","2027-03-08":"EY","2027-03-09":"E","2027-03-10":"E","2027-03-11":"YV","2027-03-12":"E","2027-03-13":"EYV","2027-03-15":"EY","2027-03-16":"E","2027-03-17":"E","2027-03-18":"YV","2027-03-19":"E","2027-03-20":"EYV","2027-03-22":"EY","2027-03-23":"E","2027-03-24":"E","2027-03-25":"YV","2027-03-26":"E","2027-03-27":"EYV","2027-03-29":"EY","2027-03-30":"E","2027-03-31":"E","2027-04-01":"YV","2027-04-02":"E","2027-04-03":"EYV","2027-04-05":"EY","2027-04-06":"E","2027-04-07":"E","2027-04-08":"YV","2027-04-09":"E","2027-04-10":"EYV","2027-04-12":"EY","2027-04-13":"E","2027-04-14":"E","2027-04-15":"YV","2027-04-16":"E","2027-04-17":"EYV","2027-04-19":"EY","2027-04-20":"E","2027-04-21":"E","2027-04-22":"YV","2027-04-23":"E","2027-04-24":"EYV","2027-04-26":"EY","2027-04-27":"E","2027-04-28":"E","2027-04-29":"YV","2027-04-30":"E","2027-05-01":"EYV","2027-05-03":"EY","2027-05-04":"E","2027-05-05":"E","2027-05-06":"YV","2027-05-07":"E","2027-05-08":"EYV","2027-05-10":"EY","2027-05-11":"E","2027-05-12":"E","2027-05-13":"YV","2027-05-14":"E","2027-05-15":"EYV","2027-05-17":"EY","2027-05-18":"E","2027-05-19":"E","2027-05-20":"YV","2027-05-21":"E","2027-05-22":"EYV","2027-05-24":"EY","2027-05-25":"E","2027-05-26":"E","2027-05-27":"YV","2027-05-28":"E","2027-05-29":"EYV","2027-06-01":"E","2027-06-02":"E","2027-06-03":"YV","2027-06-04":"E","2027-06-05":"EYV","2027-06-07":"EY","2027-06-08":"E","2027-06-09":"E","2027-06-10":"Y","2027-06-11":"E","2027-06-12":"EY","2027-06-14":"E","2027-06-15":"E","2027-06-16":"E","2027-06-18":"E","2027-06-19":"E","2027-06-21":"E","2027-06-22":"E","2027-06-23":"E","2027-06-25":"E"};
+  var events = [{"s":"2026-09-25","e":"2026-09-27","kind":"regional","name":"Premier Challenge","loc":"Suffern, NY","typ":"ROC/RJCC/RYC"},{"s":"2026-10-02","e":"2026-10-04","kind":"regional","name":"Ben Gutenberg Memorial","loc":"Rochester, NY","typ":"SYC/RJCC"},{"s":"2026-10-24","e":"2026-10-25","kind":"regional","name":"Morris Cup","loc":"Suffern, NY","typ":"RYC/RJCC"},{"s":"2026-11-27","e":"2026-11-29","kind":"regional","name":"Cobra Challenge","loc":"Secaucus, NJ","typ":"SYC/RCC"},{"s":"2026-12-18","e":"2026-12-20","kind":"regional","name":"Fairfax Challenge","loc":"Fredericksburg, VA","typ":"ROC/RJCC/RYC"},{"s":"2027-01-16","e":"2027-01-18","kind":"regional","name":"Capitol Clash","loc":"Oxon Hill, MD","typ":"SYC/RCC and Y8"},{"s":"2027-02-26","e":"2027-02-28","kind":"regional","name":"Duel of the East Coast","loc":"Phoenixville, PA","typ":"ROC/RJCC/RYC"},{"s":"2027-03-19","e":"2027-03-21","kind":"regional","name":"American Challenge","loc":"Hartford, CT","typ":"SYC/RJCC"},{"s":"2027-03-26","e":"2027-03-28","kind":"regional","name":"Absolute Foundation","loc":"Atlantic City, NJ","typ":"RYC/RJCC"},{"s":"2027-04-09","e":"2027-04-11","kind":"regional","name":"Fairfax Challenge","loc":"Virginia Beach, VA","typ":"SYC/RJCC"},{"s":"2027-04-24","e":"2027-04-25","kind":"regional","name":"American Challenge","loc":"Suffern, NY","typ":"RJCC/RYC"},{"s":"2026-10-09","e":"2026-10-12","kind":"national","name":"NAC Orlando","loc":"Orlando, FL","typ":"National"},{"s":"2026-11-20","e":"2026-11-23","kind":"national","name":"NAC Columbus","loc":"Columbus, OH","typ":"National"},{"s":"2027-01-08","e":"2027-01-11","kind":"national","name":"Junior Olympics","loc":"Oklahoma City, OK","typ":"National"},{"s":"2027-07-02","e":"2027-07-11","kind":"national","name":"Summer Nationals","loc":"Salt Lake City, UT","typ":"National"},{"s":"2027-04-16","e":"2027-04-19","kind":"national","name":"NAC Cincinnati","loc":"Cincinnati, OH","typ":"National"},{"s":"2026-10-15","e":"2026-10-18","kind":"fie","name":"World Cup","loc":"Takamatsu, JPN"},{"s":"2026-11-12","e":"2026-11-15","kind":"fie","name":"World Cup","loc":"Palma de Mallorca, ESP"},{"s":"2026-12-10","e":"2026-12-13","kind":"fie","name":"World Cup","loc":"Shanghai, CHN"},{"s":"2027-01-15","e":"2027-01-17","kind":"fie","name":"World Cup","loc":"Paris FRA (men) / Singapore SGP (women)"},{"s":"2027-02-26","e":"2027-02-28","kind":"fie","name":"Grand Prix","loc":"Turin, ITA"},{"s":"2027-03-11","e":"2027-03-14","kind":"fie","name":"World Cup","loc":"Istanbul, TUR"},{"s":"2027-03-26","e":"2027-03-28","kind":"fie","name":"Grand Prix","loc":"Lima, PER"},{"s":"2027-05-07","e":"2027-05-09","kind":"fie","name":"Grand Prix","loc":"Hong Kong, HKG"},{"s":"2027-07-20","e":"2027-07-28","kind":"fie","name":"World Championships","loc":"Tashkent, UZB"},{"s":"2026-12-27","e":"2026-12-30","kind":"camp","name":"Winter Camp","loc":"JO prep, included for Elite and Youth Competitive"},{"s":"2027-06-26","e":"2027-06-29","kind":"camp","name":"Pre-Nationals Camp","loc":"included for Elite and Youth Competitive"},{"s":"2027-02-15","e":"2027-02-15","kind":"clinic","name":"Clinic, all programs","loc":"replaces regular classes that day"},{"s":"2027-01-03","e":"2027-01-03","kind":"clinic","name":"Clinic, all programs","loc":"replaces regular classes that day"},{"s":"2026-09-07","e":"2026-09-07","kind":"closed","name":"Closed, Labor Day"},{"s":"2026-11-26","e":"2026-11-26","kind":"closed","name":"Closed, Thanksgiving"},{"s":"2026-11-28","e":"2026-11-28","kind":"split","name":"Youth and Varsity closed, Elite runs","loc":"Cobra Challenge weekend"},{"s":"2026-12-25","e":"2026-12-25","kind":"closed","name":"Closed, Christmas"},{"s":"2027-01-01","e":"2027-01-01","kind":"closed","name":"Closed, New Year's Day"},{"s":"2027-05-31","e":"2027-05-31","kind":"closed","name":"Closed, Memorial Day"}];
+  var inhouse = {'2026-10-03':1,'2026-11-07':1,'2026-12-19':1,'2027-02-06':1,'2027-03-13':1,'2027-05-01':1,'2027-06-05':1};
+  var MONTHS = [[2026,8],[2026,9],[2026,10],[2026,11],[2027,0],[2027,1],[2027,2],[2027,3],[2027,4],[2027,5],[2027,6]];
+  var MN = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var DOW = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
+  function iso(y,m,d){return y+"-"+String(m+1).padStart(2,"0")+"-"+String(d).padStart(2,"0");}
+  function evForDay(is){return events.filter(function(e){return e.s<=is && is<=e.e;});}
+  // precedence for cell fill: national > national_out > regional > closed > band
+  function cellClasses(is){
+    var evs=evForDay(is); var cls=[]; var bar=null; var soft=false;
+    var rank={national:5,national_out:4,regional:3,closed:2,band:1};
+    var fill=null, fr=0;
+    evs.forEach(function(e){
+      var k=e.kind;
+      if(k==='camp_tba'||k==='champ'){ if(e.band && rank.band>fr){fill='band'; fr=rank.band;} }
+      else if(rank[k] && rank[k]>fr){ fill=k; fr=rank[k]; }
+      if(k==='fie') bar='fie';
+      if(k==='champ'){bar='champ'; if(e.band) soft=true;}
+    });
+    if(fill) cls.push(fill);
+    if(bar) cls.push(bar);
+    if(soft) cls.push('soft');
+    return cls;
   }
-
-  var wrap = document.getElementById('euf-months');
-  var dow = ['S','M','T','W','T','F','S'];
-  months.forEach(function(mo){
-    var y=mo[0], m=mo[1], label=mo[2];
-    var card = document.createElement('div');
-    card.className = 'm-card';
-    var h = '<div class="m-head"><div class="m-eyebrow">2026-27 Season</div><div class="m-name">'+label+'</div></div>';
-    h += '<div class="m-grid">';
-    for(var i=0;i<7;i++) h += '<div class="dow">'+dow[i]+'</div>';
-    var first = new Date(y,m-1,1).getDay();
-    var days = new Date(y,m,0).getDate();
-    for(var i=0;i<first;i++) h += '<div></div>';
-    for(var d=1; d<=days; d++){
-      var f = F[y+'-'+m+'-'+d] || {};
-      var cls = f.cls || '';
-      h += '<div class="day '+cls+'">'+d+dots(y,m,d,cls)+'</div>';
+  function dayTags(is){
+    var t=[];
+    evForDay(is).forEach(function(e){
+      if(e.kind==='camp'||e.kind==='camp_tba') t.push(['camp','CAMP']);
+      else if(e.kind==='clinic') t.push(['clinic','CLINIC']);
+      else if(e.kind==='clinic_tba') t.push(['clinic','CLINIC?']);
+      else if(e.kind==='closed') t.push(['closed','CLOSED']);
+      else if(e.kind==='split') t.push(['closed','Y/V CLOSED']);
+    });
+    return t;
+  }
+  var grid=document.getElementById('euf-cal-grid');
+  MONTHS.forEach(function(ym){
+    var y=ym[0], m=ym[1];
+    var wrap=document.createElement('div');
+    var mo=document.createElement('div'); mo.className='month';
+    var mh='<div class="mhead">'+MN[m]+' '+y+'</div>';
+    mh+='<div class="dow">'+DOW.map(function(d){return '<span>'+d+'</span>';}).join('')+'</div>';
+    var first=new Date(y,m,1).getDay();
+    var dim=new Date(y,m+1,0).getDate();
+    var cells='';
+    for(var i=0;i<first;i++) cells+='<div class="d empty"></div>';
+    for(var d=1; d<=dim; d++){
+      var is=iso(y,m,d);
+      var cls=cellClasses(is);
+      var letters=practices[is]||'';
+      var lh='';
+      for(var k=0;k<letters.length;k++){var ch=letters[k]; lh+='<span class="chip c'+ch+'">'+ch+'</span>'; if(ch==='Y'&&inhouse[is]){lh+='<span class="ih" title="Youth in-house tournament">IH</span>';}}
+      var tags=dayTags(is).map(function(t){return '<span class="tag '+t[0]+'">'+t[1]+'</span>';}).join('');
+      var titleParts=evForDay(is).map(function(e){return e.name+(e.loc?(', '+e.loc):'');});
+      var title=titleParts.join(' | ');
+      cells+='<div class="d '+cls.join(' ')+'"'+(title?(' title="'+title.replace(/"/g,'&quot;')+'"'):'')+'>'
+        +'<div class="dn">'+d+'</div>'
+        +(letters?('<div class="letters">'+lh+'</div>'):'')
+        +tags+'</div>';
     }
-    h += '</div>';
-    var ev = events[y+'-'+m];
-    if(ev && ev.length){
-      h += '<div class="m-events">';
-      ev.forEach(function(e){ h += '<div>'+e+'</div>'; });
-      h += '</div>';
+    mo.innerHTML=mh+'<div class="days">'+cells+'</div>';
+    wrap.appendChild(mo);
+    // text list
+    var list=document.createElement('div'); list.className='mlist';
+    var special={};
+    // per-month term-boundary notes
+    if(y===2026&&m===11) special.extra=['<span class="lbl">Last days before winter break:</span> Youth and Varsity end Dec 19, Elite continues through Dec 23. All programs dark Dec 24 through Jan 3.'];
+    if(y===2027&&m===0) special.extra=['<span class="lbl">Resume dates:</span> Elite and Youth Competitive return Jan 4, Youth Beginner and Varsity return Jan 7.'];
+    if(y===2027&&m===5) special.extra=['<span class="lbl">Program end dates:</span> Youth Beginner and Varsity end Jun 5, Youth Competitive ends Jun 12, Elite ends Jun 25.'];
+    // events in this month
+    var monthEvents=events.filter(function(e){
+      var es=new Date(e.s), ee=new Date(e.e);
+      return (es.getFullYear()===y&&es.getMonth()===m)||(ee.getFullYear()===y&&ee.getMonth()===m)||(es< new Date(y,m,1)&&ee>new Date(y,m+1,0));
+    }).sort(function(a,b){return a.s<b.s?-1:1;});
+    var labelKind={regional:'Regional',national:'National',fie:'International',camp:'Camp',clinic:'Clinic',closed:'Closed',split:'Closure'};
+    function fmt(e){
+      var a=e.s.slice(5).replace('-','/'), b=e.e.slice(5).replace('-','/');
+      var dr = (e.s===e.e)? a : a+' to '+b;
+      var lk=labelKind[e.kind]||'';
+      var body=e.name+(e.loc?(', '+e.loc):'')+(e.note?(' <span class="note">('+e.note+')</span>'):'');
+      return '<li><span class="lbl">'+dr+'</span> &middot; '+(lk?('<span class="lbl">'+lk+':</span> '):'')+body+'</li>';
     }
-    card.innerHTML = h;
-    wrap.appendChild(card);
+    var items=monthEvents.map(fmt);
+    var html='';
+    if(special.extra){ html+='<ul>'+special.extra.map(function(x){return '<li>'+x+'</li>';}).join(''); } else { html+='<ul>'; }
+    if(items.length){ html+=items.join(''); }
+    else if(!special.extra){ html+='<li class="none">No tournaments, camps, clinics, or closures this month.</li>'; }
+    html+='</ul>';
+    list.innerHTML=html;
+    wrap.appendChild(list);
+    grid.appendChild(wrap);
   });
+
+  // Beginner cycles
+  var cycles=[["Cycle 1","Sep 3","Oct 3",10],["Cycle 2","Oct 8","Nov 7",10],["Cycle 3","Nov 12","Dec 19",10],["Cycle 4","Jan 7","Feb 6",10],["Cycle 5","Feb 11","Mar 13",10],["Cycle 6","Mar 18","May 1",14],["Cycle 7","May 6","Jun 5",10]];
+  var ct=document.getElementById('euf-cyc');
+  var thead='<tr><th>Cycle</th><th>Starts</th><th>Closing tournament</th><th>Sessions</th></tr>';
+  var body=cycles.map(function(c){var hl=(c[3]!==10)?' class="hl"':''; return '<tr'+hl+'><td class="lbl">'+c[0]+'</td><td>'+c[1]+'</td><td>'+c[2]+'</td><td class="n">'+c[3]+'</td></tr>';}).join('');
+  body+='<tr class="hl"><td colspan="3" style="text-align:right;font-weight:700;color:#1B3A6B">Total</td><td class="n">74</td></tr>';
+  ct.innerHTML=thead+body;
 })();
 </script>
-
 </body>
 </html>
