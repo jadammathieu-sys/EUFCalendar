@@ -113,7 +113,7 @@
   </div>
   <div class="goldbar"></div>
   <div class="intro">
-    <p>Every training day for the season, September 3, 2026 through June 25, 2027, plus camps, clinics, closures, and the tournaments on the EUF calendar. Each day shows which programs train: <strong>E</strong> Elite, <strong>Y</strong> Youth, <strong>V</strong> Varsity. On Mondays the youth session is Youth Competitive only; Youth Beginner trains Thursdays and Saturdays. Below each month is a plain list of that month's dated events.</p>
+    <p>Every training day for the season, September 3, 2026 through June 25, 2027, plus camps, clinics, closures, and the tournaments on the EUF calendar. Each day shows which programs train: <strong>E</strong> Elite, <strong>Y</strong> Youth, <strong>V</strong> Varsity. Youth Beginner fencers train two days a week, chosen from Monday, Thursday, and Saturday. Below each month is a plain list of that month's dated events.</p>
   </div>
 
   <div class="legend">
@@ -137,7 +137,7 @@
   <div class="cycles">
     <div class="eyebrow">Youth Beginner</div>
     <h3>Beginner Cycle Schedule</h3>
-    <p>Youth Beginner runs in seven cycles, each closing with an in-house tournament on a Saturday. Cycles 1 through 5 and Cycle 7 are 10 sessions. Cycle 6 is 14 sessions because it spans the schools' staggered spring breaks.</p>
+    <p>Youth Beginner runs in seven cycles, each closing with an in-house tournament on a Saturday. Fencers train two days a week, choosing from Monday, Thursday, and Saturday. Most cycles are 10 sessions. Cycle 6 is 14 because it spans the schools' staggered spring breaks, and Cycle 3 is 11.</p>
     <table class="cyc" id="euf-cyc"></table>
   </div>
 
@@ -240,11 +240,11 @@
   });
 
   // Beginner cycles
-  var cycles=[["Cycle 1","Sep 3","Oct 3",10],["Cycle 2","Oct 8","Nov 7",10],["Cycle 3","Nov 12","Dec 19",10],["Cycle 4","Jan 7","Feb 6",10],["Cycle 5","Feb 11","Mar 13",10],["Cycle 6","Mar 18","May 1",14],["Cycle 7","May 6","Jun 5",10]];
+  var cycles=[["Cycle 1","Thu Sep 3","Sat Oct 3",10],["Cycle 2","Mon Oct 5","Sat Nov 7",10],["Cycle 3","Mon Nov 9","Sat Dec 19",11],["Cycle 4","Mon Jan 4","Sat Feb 6",10],["Cycle 5","Mon Feb 8","Sat Mar 13",10],["Cycle 6","Mon Mar 15","Sat May 1",14],["Cycle 7","Mon May 3","Sat Jun 5",10]];
   var ct=document.getElementById('euf-cyc');
   var thead='<tr><th>Cycle</th><th>Starts</th><th>Closing tournament</th><th>Sessions</th></tr>';
   var body=cycles.map(function(c){var hl=(c[3]!==10)?' class="hl"':''; return '<tr'+hl+'><td class="lbl">'+c[0]+'</td><td>'+c[1]+'</td><td>'+c[2]+'</td><td class="n">'+c[3]+'</td></tr>';}).join('');
-  body+='<tr class="hl"><td colspan="3" style="text-align:right;font-weight:700;color:#1B3A6B">Total</td><td class="n">74</td></tr>';
+  body+='<tr class="hl"><td colspan="3" style="text-align:right;font-weight:700;color:#1B3A6B">Total</td><td class="n">75</td></tr>';
   ct.innerHTML=thead+body;
 })();
 </script>
